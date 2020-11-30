@@ -1,6 +1,6 @@
 let transactions = [];
 let myChart;
-console.log(transactions)
+
 fetch("/api/transaction").then(response => {
     return response.json();
 }).then(data => {
