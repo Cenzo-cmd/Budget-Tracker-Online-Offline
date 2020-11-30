@@ -6,7 +6,6 @@ fetch("/api/transaction").then(response => {
 }).then(data => {
     // save db data on global variable
     transactions = data;
-    console.log("these are the transactions", transactions)
 
     populateTotal();
     populateTable();
@@ -112,13 +111,13 @@ function sendTransaction(isAdding) {
 
     // also send to server
     fetch("/api/transaction", {
-            method: "POST",
-            body: JSON.stringify(transaction),
-            headers: {
-                Accept: "application/json, text/plain, */*",
-                "Content-Type": "application/json"
-            }
-        })
+        method: "POST",
+        body: JSON.stringify(transaction),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
         .then(response => {
             return response.json();
         })
@@ -141,10 +140,10 @@ function sendTransaction(isAdding) {
         });
 }
 
-document.querySelector("#add-btn").onclick = function() {
+document.querySelector("#add-btn").onclick = function () {
     sendTransaction(true);
 };
 
-document.querySelector("#sub-btn").onclick = function() {
+document.querySelector("#sub-btn").onclick = function () {
     sendTransaction(false);
 };
