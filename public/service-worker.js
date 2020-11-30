@@ -60,13 +60,14 @@ self.addEventListener("fetch", function (evt) {
                 });
             }).catch(err => console.log(err))
         );
+    } else {
+        evt.respondWith(
+            caches.open(CACHE_NAME).then(cache => {
+                return cache.match(evt.request).then(response => {
+                    return response || fetch(evt.request);
+                });
+            })
+        );
     }
-
-    evt.respondWith(
-        caches.open(CACHE_NAME).then(cache => {
-            return cache.match(evt.request).then(response => {
-                return response || fetch(evt.request);
-            });
-        })
-    );
 });
+
